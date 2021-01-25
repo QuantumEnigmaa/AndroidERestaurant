@@ -1,31 +1,34 @@
 package fr.isen.vaisseau.androiderestaurant2
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
+import android.widget.Toast
+import fr.isen.vaisseau.androiderestaurant2.databinding.ActivityHomeBinding
+
+private lateinit var binding: ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
-
-        // Variable declaration
-        val entry: TextView = findViewById(R.id.activity_home_entree);
-        val mainFood: TextView = findViewById(R.id.activity_home_plats);
-        val dessert: TextView = findViewById(R.id.activity_home_dessert);
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root);
 
         // onClick handler
-        entry.setOnClickListener {
-            //val intent = Intent(this, );
+        binding.activityHomeEntree.setOnClickListener {
+            val intent = Intent(this, FoodActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
-        mainFood.setOnClickListener {
+        binding.activityHomePlats.setOnClickListener {
 
         }
 
-        dessert.setOnClickListener {
+        binding.activityHomeDessert.setOnClickListener {
 
         }
+
     }
 }
