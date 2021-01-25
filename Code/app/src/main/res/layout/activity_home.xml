@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    tools:context=".HomeActivity"
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/home_activity_restoTitle"
@@ -14,7 +15,8 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
         android:text="HardMeal"
-        android:textSize="50dp"
+        android:textSize="45dp"
+        android:textColor="@color/dark_golden_rod"
         android:textStyle="italic"
         app:layout_constraintEnd_toStartOf="@+id/home_activity_androidChef"
         app:layout_constraintHorizontal_bias="0.037"

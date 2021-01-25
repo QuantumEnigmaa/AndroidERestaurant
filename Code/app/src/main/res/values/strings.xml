@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">HardMeal</string>
+    <string-array name="entries_title">
+        <item>Entrée 1</item>
+        <item>Entrée 2</item>
+        <item>Entrée 3</item>
+    </string-array>
+    <string-array name="entries_spec">
+        <item>description 1</item>
+        <item>description 2</item>
+        <item>description 3</item>
+    </string-array>
 </resources>
