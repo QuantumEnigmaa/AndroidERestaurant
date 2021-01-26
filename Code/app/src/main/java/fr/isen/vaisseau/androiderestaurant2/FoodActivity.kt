@@ -22,25 +22,26 @@ class FoodActivity : AppCompatActivity() {
         // Using recycler view
         when (result) {
             "Entrée" -> {
+                // Should think of a way to avoid code duplicating
                 val foodTitle = resources.getStringArray(R.array.entries_title).toList()
 
                 val recycler: RecyclerView = binding.activityFoodRecycler
                 recycler.layoutManager = LinearLayoutManager(this)
-                recycler.adapter = MyAdaptater(foodTitle)
+                recycler.adapter = MyAdaptater(foodTitle, this)
             }
             "Plats" -> {
                 val foodTitle = resources.getStringArray(R.array.main_title).toList()
 
                 val recycler: RecyclerView = binding.activityFoodRecycler
                 recycler.layoutManager = LinearLayoutManager(this)
-                recycler.adapter = MyAdaptater(foodTitle)
+                recycler.adapter = MyAdaptater(foodTitle, this)
             }
             "Dessert" -> {
                 val foodTitle = resources.getStringArray(R.array.dessert_title).toList()
 
                 val recycler: RecyclerView = binding.activityFoodRecycler
                 recycler.layoutManager = LinearLayoutManager(this)
-                recycler.adapter = MyAdaptater(foodTitle)
+                recycler.adapter = MyAdaptater(foodTitle, this)
             }
         }
     }
