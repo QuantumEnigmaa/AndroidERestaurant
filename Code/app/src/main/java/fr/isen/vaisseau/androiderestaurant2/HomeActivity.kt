@@ -20,7 +20,7 @@ class HomeActivity : AppCompatActivity() {
         // onClick handler
         binding.activityHomeEntree.setOnClickListener {
             val intent = Intent(this, FoodActivity::class.java)
-            intent.putExtra(START_FOOD, "Entrée")
+            intent.putExtra(START_FOOD, "Entr\u00e9es")
             startActivity(intent)
         }
 
@@ -32,7 +32,7 @@ class HomeActivity : AppCompatActivity() {
 
         binding.activityHomeDessert.setOnClickListener {
             val intent = Intent(this, FoodActivity::class.java)
-            intent.putExtra(START_FOOD, "Dessert")
+            intent.putExtra(START_FOOD, "Desserts")
             startActivity(intent)
         }
 

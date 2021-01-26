@@ -14,6 +14,7 @@ import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import fr.isen.vaisseau.androiderestaurant2.databinding.ActivityFoodBinding
 import fr.isen.vaisseau.androiderestaurant2.model.DataFoodJSON
+import fr.isen.vaisseau.androiderestaurant2.model.Item
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -25,11 +26,12 @@ class FoodActivity : AppCompatActivity() {
         binding = ActivityFoodBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        loadData()
-
         // Getting info from home activity
         val result:String = intent.getStringExtra(START_FOOD).toString()
         binding.activityFoodTitle.text = result
+
+        // Loading data from API
+        loadData(result)
 
         /*// Using recycler view
         when (result) {
@@ -48,13 +50,13 @@ class FoodActivity : AppCompatActivity() {
         }*/
     }
 
-    private fun setRecycler(titles: List<String>) {
+    private fun setRecycler(list: List<Item>) {
         val recycler: RecyclerView = binding.activityFoodRecycler
         recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = MyAdaptater(titles, this)
+        recycler.adapter = MyAdaptater(list, this)
     }
 
-    private fun loadData() {
+    private fun loadData(category: String) {
         // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(this)
         val url = "http://test.api.catering.bluecodegames.com/menu"
@@ -70,8 +72,9 @@ class FoodActivity : AppCompatActivity() {
         val request = JsonObjectRequest(Request.Method.POST, url, data,
             {
                 val gson: DataFoodJSON = Gson().fromJson(it.toString(), DataFoodJSON::class.java)
-                val categories:List<String> = gson.data.map { it.name }
-                setRecycler(categories)
+                gson.data.firstOrNull() { it.name == category}?.items?.let {
+                    setRecycler(it)
+                }
             },
             { error -> Log.d("error", error.toString()) }
         )
