@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp">
@@ -13,13 +14,23 @@
         android:background="@drawable/border_rec_full"
         android:padding="10dp">
 
+        <ImageView
+            android:id="@+id/recycler_image"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            app:srcCompat="@drawable/horns_up" />
+
         <TextView
             android:id="@+id/recycler_title"
             android:layout_width="wrap_content"
+            android:maxWidth="150dp"
             android:layout_height="wrap_content"
-            android:text="TextView"
             android:layout_centerHorizontal="true"
-            android:textStyle="bold"/>
+            android:layout_toLeftOf="@+id/recycler_rightArrow"
+            android:layout_marginStart="10dp"
+            android:text="TextView"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/recycler_price"
@@ -27,15 +38,18 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/recycler_title"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="5dp"
             android:text="prix" />
 
         <ImageView
+            android:id="@+id/recycler_rightArrow"
             android:layout_width="35dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/right_arrow"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"></ImageView>
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/right_arrow"></ImageView>
 
     </RelativeLayout>
 </LinearLayout>

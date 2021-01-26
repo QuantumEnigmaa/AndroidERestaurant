@@ -32,22 +32,6 @@ class FoodActivity : AppCompatActivity() {
 
         // Loading data from API
         loadData(result)
-
-        /*// Using recycler view
-        when (result) {
-            "Entrée" -> {
-                val foodTitle = resources.getStringArray(R.array.entries_title).toList()
-                setRecycler(foodTitle)
-            }
-            "Plats" -> {
-                val foodTitle = resources.getStringArray(R.array.main_title).toList()
-                setRecycler(foodTitle)
-            }
-            "Dessert" -> {
-                val foodTitle = resources.getStringArray(R.array.dessert_title).toList()
-                setRecycler(foodTitle)
-            }
-        }*/
     }
 
     private fun setRecycler(list: List<Item>) {
