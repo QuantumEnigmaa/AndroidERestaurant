@@ -8,7 +8,7 @@ import android.widget.Toast
 import fr.isen.vaisseau.androiderestaurant2.databinding.ActivityHomeBinding
 
 private lateinit var binding: ActivityHomeBinding
-public const val START_FOOD = "startFood"
+const val START_FOOD = "startFood"
 
 class HomeActivity : AppCompatActivity() {
 
