@@ -2,7 +2,9 @@ package fr.isen.vaisseau.androiderestaurant2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.squareup.picasso.Picasso
 import fr.isen.vaisseau.androiderestaurant2.databinding.ActivityProductBinding
+import fr.isen.vaisseau.androiderestaurant2.model.Item
 
 private lateinit var binding: ActivityProductBinding
 
@@ -12,7 +14,12 @@ class ProductActivity : AppCompatActivity() {
         binding = ActivityProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val result:String = intent.getStringExtra(START_PRODUCT).toString()
-        binding.activityProductTitle.text = result
+        val result = intent.getSerializableExtra(START_PRODUCT) as? Item
+        binding.activityProductTitle.text = result?.name
+        binding.activityProductIngredients.text = result?.getIngredients()
+
+        val imageSrc = result?.getFirstPicture()
+        Picasso.get().load(imageSrc).placeholder(R.drawable.searching).error(R.drawable.error_image).fit().into(
+            binding.activityProductFoodImage)
     }
 }

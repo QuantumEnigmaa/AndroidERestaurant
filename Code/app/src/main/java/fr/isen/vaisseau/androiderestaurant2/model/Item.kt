@@ -10,6 +10,8 @@ data class Item (
         @SerializedName("prices") private val prices: List<Price>
             ): Serializable {
 
+                fun getIngredients(): String = ingredients.map { it.name }.joinToString (", ")
+
                 fun getPrice() = prices[0].price.toDouble()
                 fun getFormattedPrice() = prices[0].price + " €"
 

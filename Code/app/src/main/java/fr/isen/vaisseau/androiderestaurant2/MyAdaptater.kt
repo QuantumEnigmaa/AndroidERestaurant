@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import fr.isen.vaisseau.androiderestaurant2.databinding.RecyclerTemplateBinding
+import fr.isen.vaisseau.androiderestaurant2.model.Ingredient
 import fr.isen.vaisseau.androiderestaurant2.model.Item
 
 const val START_PRODUCT = "startProduct"
@@ -34,11 +35,11 @@ class MyAdaptater (private var itemList: List<Item>, private val ct: Context) : 
         holder.price.text = itemList[position].getFormattedPrice()
 
         val imageUrl = itemList[position].getFirstPicture()
-        Picasso.get().load(imageUrl).placeholder(R.drawable.error_image).error(R.drawable.error_image).fit().into(holder.image)
+        Picasso.get().load(imageUrl).placeholder(R.drawable.searching).error(R.drawable.error_image).fit().into(holder.image)
 
         holder.container.setOnClickListener {
             val intent = Intent(ct, ProductActivity::class.java)
-            intent.putExtra(START_PRODUCT, holder.title.text)
+            intent.putExtra(START_PRODUCT, itemList[position])
             ct.startActivity(intent)
         }
     }
