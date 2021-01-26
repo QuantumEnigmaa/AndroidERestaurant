@@ -11,7 +11,9 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.gson.Gson
 import fr.isen.vaisseau.androiderestaurant2.databinding.ActivityFoodBinding
+import fr.isen.vaisseau.androiderestaurant2.model.DataFoodJSON
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -23,31 +25,13 @@ class FoodActivity : AppCompatActivity() {
         binding = ActivityFoodBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Instantiate the RequestQueue.
-        val queue = Volley.newRequestQueue(this)
-        val url = "http://test.api.catering.bluecodegames.com/menu"
-        val data = JSONObject()
-
-        try {
-            data.put("id_shop", "1")
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-
-        // Request a string response from the provided URL.
-        val request = JsonObjectRequest(Request.Method.POST, url, data,
-            { response -> Log.d("response", response.toString())},
-            { error -> Log.d("error", error.toString()) }
-        )
-
-        // Add the request to the RequestQueue.
-        queue.add(request)
+        loadData()
 
         // Getting info from home activity
         val result:String = intent.getStringExtra(START_FOOD).toString()
         binding.activityFoodTitle.text = result
 
-        // Using recycler view
+        /*// Using recycler view
         when (result) {
             "Entrée" -> {
                 val foodTitle = resources.getStringArray(R.array.entries_title).toList()
@@ -61,12 +45,38 @@ class FoodActivity : AppCompatActivity() {
                 val foodTitle = resources.getStringArray(R.array.dessert_title).toList()
                 setRecycler(foodTitle)
             }
-        }
+        }*/
     }
 
-    fun setRecycler(titles: List<String>) {
+    private fun setRecycler(titles: List<String>) {
         val recycler: RecyclerView = binding.activityFoodRecycler
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = MyAdaptater(titles, this)
+    }
+
+    private fun loadData() {
+        // Instantiate the RequestQueue.
+        val queue = Volley.newRequestQueue(this)
+        val url = "http://test.api.catering.bluecodegames.com/menu"
+        val data = JSONObject()
+
+        try {
+            data.put("id_shop", "1")
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+
+        // Request a string response from the provided URL.
+        val request = JsonObjectRequest(Request.Method.POST, url, data,
+            {
+                val gson: DataFoodJSON = Gson().fromJson(it.toString(), DataFoodJSON::class.java)
+                val categories:List<String> = gson.data.map { it.name }
+                setRecycler(categories)
+            },
+            { error -> Log.d("error", error.toString()) }
+        )
+
+        // Add the request to the RequestQueue.
+        queue.add(request)
     }
 }
