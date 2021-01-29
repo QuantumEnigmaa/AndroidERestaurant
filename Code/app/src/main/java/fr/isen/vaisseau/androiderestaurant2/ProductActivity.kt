@@ -5,9 +5,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import com.squareup.picasso.Picasso
+import com.google.gson.Gson
 import fr.isen.vaisseau.androiderestaurant2.databinding.ActivityProductBinding
+import fr.isen.vaisseau.androiderestaurant2.model.AddItem
 import fr.isen.vaisseau.androiderestaurant2.model.Item
+import org.json.JSONObject
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileWriter
+import java.nio.Buffer
 
 private lateinit var binding: ActivityProductBinding
 
@@ -25,11 +31,23 @@ class ProductActivity : AppCompatActivity() {
 
         setViewPager(listImageSrc)
         setPrice(result)
-        buyingHandler()
+        buyingHandler(result, "Basket.json")
     }
 
-    private fun buyingHandler() {
+    private fun buyingHandler(addedItem: Item, file: String) {
+        /*val itemAdded = AddItem(addedItem.name, addedItem.getPrice().toInt())
+        val jsoonString: String = Gson().toJson(itemAdded)
+
+        val toWrite = File(file)
+        toWrite.writeText(jsoonString)*/
+
         binding.activityProductBuy.setOnClickListener {
+            val itemAdded = AddItem(addedItem.name, addedItem.getPrice().toInt())
+            val jsoonString: String = Gson().toJson(itemAdded)
+
+            val toWrite = File(cacheDir.absolutePath+file)
+            toWrite.writeText(jsoonString)
+
             val dialogBuilder = AlertDialog.Builder(this)
 
             dialogBuilder.setMessage("Article ajouté à votre panier").setCancelable(true)
