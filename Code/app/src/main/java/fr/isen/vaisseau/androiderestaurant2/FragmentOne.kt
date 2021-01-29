@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.squareup.picasso.Picasso
 import fr.isen.vaisseau.androiderestaurant2.databinding.ActivityProductBinding
 import fr.isen.vaisseau.androiderestaurant2.databinding.FragmentTemplateBinding
 
@@ -31,7 +32,9 @@ class FragmentOne : Fragment() {
             param1 = it.getString(ARG_PARAM1)
         }
 
-        binding.fragmentOneText.text = param1
+        //binding.fragmentOneText.text = param1
+        Picasso.get().load(param1).placeholder(R.drawable.searching).error(R.drawable.error_image).fit().into(
+            binding.fragmentOneImage)
     }
 
     companion object {

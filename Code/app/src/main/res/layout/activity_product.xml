@@ -19,19 +19,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.039" />
 
-    <!--ImageView
-        android:id="@+id/activity_product_foodImage"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintTop_toBottomOf="@+id/activity_product_title"
-        app:srcCompat="@drawable/horns_up"
-        tools:layout_editor_absoluteX="0dp" /!-->
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/activity_product_viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="300dp"
         android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@+id/activity_product_title">
 

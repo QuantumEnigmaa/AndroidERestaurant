@@ -18,20 +18,18 @@ class ProductActivity : AppCompatActivity() {
         binding.activityProductTitle.text = result?.name
         binding.activityProductIngredients.text = result?.getIngredients()
 
-        /*val imageSrc = result?.getFirstPicture()
-        Picasso.get().load(imageSrc).placeholder(R.drawable.searching).error(R.drawable.error_image).fit().into(
-            binding.activityProductFoodImage)*/
+        val listImageSrc: List<String> = result?.getAllPictures()!!.toList()
 
-        setViewPager()
+        setViewPager(listImageSrc)
     }
 
-    private fun setViewPager() {
+    private fun setViewPager(imagesSrc: List<String>) {
         val adapter = myViewPagerAdapter(supportFragmentManager)
 
-        val firstFragment: FragmentOne = FragmentOne.newInstance("Bonjour test")
-        val seconndFragment: FragmentOne = FragmentOne.newInstance("C'EST PARTI OUI OUI")
-        adapter.addFragment(firstFragment)
-        adapter.addFragment(seconndFragment)
+        for (image in imagesSrc) {
+            val newFragment: FragmentOne = FragmentOne.newInstance(image)
+            adapter.addFragment(newFragment)
+        }
 
         binding.activityProductViewPager.adapter = adapter
     }
