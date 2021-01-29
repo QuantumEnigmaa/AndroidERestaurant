@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import com.squareup.picasso.Picasso
 import fr.isen.vaisseau.androiderestaurant2.databinding.ActivityProductBinding
 import fr.isen.vaisseau.androiderestaurant2.model.Item
@@ -23,8 +24,19 @@ class ProductActivity : AppCompatActivity() {
         val listImageSrc: List<String> = result?.getAllPictures()!!.toList()
 
         setViewPager(listImageSrc)
-
         setPrice(result)
+        buyingHandler()
+    }
+
+    private fun buyingHandler() {
+        binding.activityProductBuy.setOnClickListener {
+            val dialogBuilder = AlertDialog.Builder(this)
+
+            dialogBuilder.setMessage("Article ajouté à votre panier").setCancelable(true)
+
+            val alert = dialogBuilder.create()
+            alert.show()
+        }
     }
 
     private fun setViewPager(imagesSrc: List<String>) {
