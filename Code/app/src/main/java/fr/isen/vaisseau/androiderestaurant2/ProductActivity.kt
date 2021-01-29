@@ -15,11 +15,15 @@ class ProductActivity : AppCompatActivity() {
         binding = ActivityProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var quantity: Int = 1
-
         val result = intent.getSerializableExtra(START_PRODUCT) as? Item
         binding.activityProductTitle.text = result?.name
         binding.activityProductIngredients.text = result?.getIngredients()
+
+        var quantity: Int = 1
+        var priceInit: Int = result?.getPrice()!!.toInt()
+        var price: Int = result?.getPrice()!!.toInt()
+
+        binding.activityProductTotalPrice.text = result?.getFormattedPrice()
 
         val listImageSrc: List<String> = result?.getAllPictures()!!.toList()
 
@@ -28,11 +32,17 @@ class ProductActivity : AppCompatActivity() {
         binding.activityProductRemove.setOnClickListener {
             if (quantity >= 0) {
                 binding.activityProductQuantity.text = (quantity--).toString()
+                price -= priceInit
+                val priceText = "$price €"
+                binding.activityProductTotalPrice.text = priceText
             }
         }
 
         binding.activityProductAdd.setOnClickListener {
             binding.activityProductQuantity.text = (quantity++).toString()
+            price += priceInit
+            val priceText = "$price €"
+            binding.activityProductTotalPrice.text = priceText
         }
     }
 
