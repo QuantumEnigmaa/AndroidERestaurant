@@ -39,16 +39,17 @@ class ProductActivity : AppCompatActivity() {
     private fun buyingHandler(addedItem: Item, file: String) {
         binding.activityProductBuy.setOnClickListener {
             val toWrite = File(cacheDir.absolutePath+file)
-            val itemAdded = AddItem(addedItem, binding.activityProductQuantity.text.toString())
+            val itemAdded = AddItem(addedItem, binding.activityProductQuantity.text.toString().toInt())
 
             if (toWrite.exists()) {
                 val gson: Basket = Gson().fromJson(toWrite.readText(), Basket::class.java)
                 //firstorNull ~ filter et let n'execute la suite du code que si le reste s'est bien exécuté
                 gson.itemList.firstOrNull { it.dish == addedItem }?.let {
-                    gson.itemList.map { it.quantity += binding.activityProductQuantity.text.toString() }
+                    gson.itemList.map { it.quantity += binding.activityProductQuantity.text.toString().toInt()}
+                }?: run {
+                    gson.itemList.add(itemAdded)
+                    toWrite.writeText(Gson().toJson(gson))
                 }
-                gson.itemList.add(itemAdded)
-                toWrite.writeText(Gson().toJson(gson))
             } else {
                 val itemList: ArrayList<AddItem> = ArrayList()
                 itemList.add(itemAdded)

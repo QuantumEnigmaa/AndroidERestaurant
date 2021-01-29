@@ -5,5 +5,5 @@ import java.io.Serializable
 
 data class AddItem (
         @SerializedName("dish") var dish: Item,
-        @SerializedName("quantity") var quantity: String
+        @SerializedName("quantity") var quantity: Int
         ) : Serializable
