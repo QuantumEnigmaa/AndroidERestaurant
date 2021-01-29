@@ -1,13 +1,9 @@
 package fr.isen.vaisseau.androiderestaurant2.model
 
-class AddItem {
-    var name: String? = null
-    var price: Int? = null
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-    constructor(): super() {}
-
-    constructor(Name: String, Price: Int): super() {
-        this.name = Name
-        this.price = Price
-    }
-}
+data class AddItem (
+        @SerializedName("dish") var dish: Item,
+        @SerializedName("quantity") var quantity: String
+        ) : Serializable

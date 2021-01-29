@@ -8,8 +8,10 @@ import androidx.appcompat.app.AlertDialog
 import com.google.gson.Gson
 import fr.isen.vaisseau.androiderestaurant2.databinding.ActivityProductBinding
 import fr.isen.vaisseau.androiderestaurant2.model.AddItem
+import fr.isen.vaisseau.androiderestaurant2.model.Basket
 import fr.isen.vaisseau.androiderestaurant2.model.Item
 import org.json.JSONObject
+import java.io.BufferedReader
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
@@ -23,11 +25,11 @@ class ProductActivity : AppCompatActivity() {
         binding = ActivityProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val result = intent.getSerializableExtra(START_PRODUCT) as? Item
-        binding.activityProductTitle.text = result?.name
-        binding.activityProductIngredients.text = result?.getIngredients()
+        val result = intent.getSerializableExtra(START_PRODUCT) as Item
+        binding.activityProductTitle.text = result.name
+        binding.activityProductIngredients.text = result.getIngredients()
 
-        val listImageSrc: List<String> = result?.getAllPictures()!!.toList()
+        val listImageSrc: List<String> = result.getAllPictures()!!.toList()
 
         setViewPager(listImageSrc)
         setPrice(result)
@@ -35,18 +37,24 @@ class ProductActivity : AppCompatActivity() {
     }
 
     private fun buyingHandler(addedItem: Item, file: String) {
-        /*val itemAdded = AddItem(addedItem.name, addedItem.getPrice().toInt())
-        val jsoonString: String = Gson().toJson(itemAdded)
-
-        val toWrite = File(file)
-        toWrite.writeText(jsoonString)*/
-
         binding.activityProductBuy.setOnClickListener {
-            val itemAdded = AddItem(addedItem.name, addedItem.getPrice().toInt())
-            val jsoonString: String = Gson().toJson(itemAdded)
-
             val toWrite = File(cacheDir.absolutePath+file)
-            toWrite.writeText(jsoonString)
+            val itemAdded = AddItem(addedItem, binding.activityProductQuantity.text.toString())
+
+            if (toWrite.exists()) {
+                val gson: Basket = Gson().fromJson(toWrite.readText(), Basket::class.java)
+                //firstorNull ~ filter et let n'execute la suite du code que si le reste s'est bien exécuté
+                gson.itemList.firstOrNull { it.dish == addedItem }?.let {
+                    gson.itemList.map { it.quantity += binding.activityProductQuantity.text.toString() }
+                }
+                gson.itemList.add(itemAdded)
+                toWrite.writeText(Gson().toJson(gson))
+            } else {
+                val itemList: ArrayList<AddItem> = ArrayList()
+                itemList.add(itemAdded)
+                val basket = Basket(itemList)
+                toWrite.writeText(Gson().toJson(basket))
+            }
 
             val dialogBuilder = AlertDialog.Builder(this)
 
