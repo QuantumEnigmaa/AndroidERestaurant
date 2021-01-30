@@ -46,6 +46,7 @@ class ProductActivity : AppCompatActivity() {
                 //firstorNull ~ filter et let n'execute la suite du code que si le reste s'est bien exécuté
                 gson.itemList.firstOrNull { it.dish == addedItem }?.let {
                     gson.itemList.map { it.quantity += binding.activityProductQuantity.text.toString().toInt()}
+                    toWrite.writeText(Gson().toJson(gson))
                 }?: run {
                     gson.itemList.add(itemAdded)
                     toWrite.writeText(Gson().toJson(gson))
@@ -57,6 +58,7 @@ class ProductActivity : AppCompatActivity() {
                 toWrite.writeText(Gson().toJson(basket))
             }
 
+            // Alert window creation
             val dialogBuilder = AlertDialog.Builder(this)
 
             dialogBuilder.setMessage("Article ajouté à votre panier").setCancelable(true)
