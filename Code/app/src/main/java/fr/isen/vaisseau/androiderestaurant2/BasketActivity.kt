@@ -23,10 +23,10 @@ class BasketActivity : AppCompatActivity() {
         retrieveBasket()
     }
 
-    private fun setRecycler(list: List<AddItem>) {
+    private fun setRecycler(list: ArrayList<AddItem>, file: File, gson: Basket) {
         val recycler: RecyclerView = binding.activityBasketRecycler
         recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = basketAdapter(list, this)
+        recycler.adapter = basketAdapter(list, file, gson)
     }
 
     private fun retrieveBasket() {
@@ -35,7 +35,7 @@ class BasketActivity : AppCompatActivity() {
         if (readFile.exists()) {
             val gson: Basket = Gson().fromJson(readFile.readText(), Basket::class.java)
             gson.itemList.let {
-                setRecycler(it.toList())
+                setRecycler(it, readFile, gson)
             }
         }
     }
