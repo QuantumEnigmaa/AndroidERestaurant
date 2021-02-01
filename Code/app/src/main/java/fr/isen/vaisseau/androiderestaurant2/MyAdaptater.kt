@@ -26,7 +26,7 @@ class MyAdaptater (private var itemList: List<Item>, private val ct: Context) : 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAdaptater.ViewHolder {
-        val itemBinding = RecyclerTemplateBinding.inflate(LayoutInflater.from(parent.context), parent, false)//LayoutInflater.from(parent.context).inflate(R.layout.recycler_template, parent, false)
+        val itemBinding = RecyclerTemplateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(itemBinding)
     }
 
