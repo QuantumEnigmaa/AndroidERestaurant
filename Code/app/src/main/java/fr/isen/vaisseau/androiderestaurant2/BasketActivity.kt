@@ -36,6 +36,7 @@ class BasketActivity : AppCompatActivity() {
             val gson: Basket = Gson().fromJson(readFile.readText(), Basket::class.java)
             gson.itemList.let {
                 setRecycler(it, readFile, gson)
+                var total: Double = it.sumOf { it.dish.getPrice() }
             }
         }
     }
