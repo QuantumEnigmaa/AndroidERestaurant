@@ -26,13 +26,15 @@ class BasketActivity : AppCompatActivity() {
     private fun setRecycler(list: ArrayList<AddItem>, file: File, gson: Basket) {
         val recycler: RecyclerView = binding.activityBasketRecycler
         recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = basketAdapter(list, file, gson)
+        val adapter = basketAdapter(list, file, gson)
+        recycler.adapter = adapter
 
-        var total = 0.0
+        /*var total = 0.0
         for (item in list) {
             total = total + item.dish.getPrice()
         }
         binding.activityBasketBuy.text = "Commander " + "$total €"
+        adapter.notifyDataSetChanged()*/
     }
 
     private fun retrieveBasket() {

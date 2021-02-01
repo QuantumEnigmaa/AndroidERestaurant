@@ -14,7 +14,7 @@
         android:background="@drawable/border_rec_full"
         android:padding="10dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/recycler_image"
             android:layout_width="100dp"
             android:layout_height="80dp"
