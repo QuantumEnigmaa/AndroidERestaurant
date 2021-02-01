@@ -23,7 +23,7 @@ import org.json.JSONObject
 
 private lateinit var binding: ActivityFoodBinding
 
-class FoodActivity : AppCompatActivity() {
+class FoodActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFoodBinding.inflate(layoutInflater)
@@ -37,7 +37,7 @@ class FoodActivity : AppCompatActivity() {
         loadData(result)
     }
 
-    // Toolbar handlers
+    /*// Toolbar handlers
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
@@ -53,7 +53,7 @@ class FoodActivity : AppCompatActivity() {
             else -> Log.i("toolbar", "problème")
         }
         return super.onOptionsItemSelected(item)
-    }
+    }*/
 
     private fun setRecycler(list: List<Item>) {
         val recycler: RecyclerView = binding.activityFoodRecycler

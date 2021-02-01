@@ -20,7 +20,7 @@ private lateinit var binding: ActivityProductBinding
 val USER_PREF = "user_preferences"
 val QUANT_PREF = "quantity"
 
-class ProductActivity : AppCompatActivity() {
+class ProductActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProductBinding.inflate(layoutInflater)
@@ -37,7 +37,7 @@ class ProductActivity : AppCompatActivity() {
         buyingHandler(result, "Basket.json")
     }
 
-    // Toolbar handlers
+    /*// Toolbar handlers
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
@@ -53,7 +53,7 @@ class ProductActivity : AppCompatActivity() {
             else -> Log.i("toolbar", "problème")
         }
         return super.onOptionsItemSelected(item)
-    }
+    }*/
 
     private fun buyingHandler(addedItem: Item, file: String) {
         binding.activityProductBuy.setOnClickListener {

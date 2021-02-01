@@ -10,7 +10,7 @@ import fr.isen.vaisseau.androiderestaurant2.databinding.ActivityHomeBinding
 private lateinit var binding: ActivityHomeBinding
 const val START_FOOD = "startFood"
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
