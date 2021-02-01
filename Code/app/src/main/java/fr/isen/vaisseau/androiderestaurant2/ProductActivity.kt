@@ -85,6 +85,13 @@ class ProductActivity : AppCompatActivity() {
         }
     }
 
+    /*private fun addPreferences(basket: Basket) {
+        val count = basket.itemList.sumOf { it.quantity }
+
+        val sharedPreferences = getSharedPreferences(, MODE_PRIVATE)
+        sharedPreferences.edit().putInt(, count).apply()
+    }*/
+
     private fun setViewPager(imagesSrc: List<String>) {
         val adapter = myViewPagerAdapter(supportFragmentManager)
 
@@ -98,14 +105,15 @@ class ProductActivity : AppCompatActivity() {
 
     private fun setPrice (result: Item) {
         var quantity: Int = 1
-        val priceInit: Int = result.getPrice().toInt()
-        var price: Int = result.getPrice().toInt()
+        val priceInit: Double = result.getPrice()
+        var price: Double = result.getPrice()
 
         binding.activityProductTotalPrice.text = result.getFormattedPrice()
 
         binding.activityProductRemove.setOnClickListener {
             if (quantity > 0) {
-                binding.activityProductQuantity.text = (quantity--).toString()
+                quantity --
+                binding.activityProductQuantity.text = quantity.toString()
                 Log.i("quantité", "$quantity")
                 price -= priceInit
                 val priceText = "$price €"
@@ -114,7 +122,8 @@ class ProductActivity : AppCompatActivity() {
         }
 
         binding.activityProductAdd.setOnClickListener {
-            binding.activityProductQuantity.text = (quantity++).toString()
+            quantity ++
+            binding.activityProductQuantity.text = quantity.toString()
             Log.i("quantité", "$quantity")
             price += priceInit
             val priceText = "$price €"
