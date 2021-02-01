@@ -1,9 +1,12 @@
 package fr.isen.vaisseau.androiderestaurant2
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.gson.Gson
 import fr.isen.vaisseau.androiderestaurant2.databinding.ActivityProductBinding
@@ -11,11 +14,7 @@ import fr.isen.vaisseau.androiderestaurant2.model.AddItem
 import fr.isen.vaisseau.androiderestaurant2.model.Basket
 import fr.isen.vaisseau.androiderestaurant2.model.Item
 import org.json.JSONObject
-import java.io.BufferedReader
-import java.io.BufferedWriter
 import java.io.File
-import java.io.FileWriter
-import java.nio.Buffer
 
 private lateinit var binding: ActivityProductBinding
 
@@ -34,6 +33,24 @@ class ProductActivity : AppCompatActivity() {
         setViewPager(listImageSrc)
         setPrice(result)
         buyingHandler(result, "Basket.json")
+    }
+
+    // Toolbar handlers
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_basket -> {
+                val intent = Intent(this, BasketActivity::class.java)
+                startActivity(intent)
+                Log.i("toolbar", "panier sélectionné")
+            }
+            else -> Log.i("toolbar", "problème")
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun buyingHandler(addedItem: Item, file: String) {
