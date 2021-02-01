@@ -27,6 +27,12 @@ class BasketActivity : AppCompatActivity() {
         val recycler: RecyclerView = binding.activityBasketRecycler
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = basketAdapter(list, file, gson)
+
+        var total = 0.0
+        for (item in list) {
+            total = total + item.dish.getPrice()
+        }
+        binding.activityBasketBuy.text = "Commander " + "$total €"
     }
 
     private fun retrieveBasket() {
@@ -36,8 +42,7 @@ class BasketActivity : AppCompatActivity() {
             val gson: Basket = Gson().fromJson(readFile.readText(), Basket::class.java)
             gson.itemList.let {
                 setRecycler(it, readFile, gson)
-                var total: Double = it.sumOf { it.dish.getPrice() }
+                }
             }
         }
-    }
 }

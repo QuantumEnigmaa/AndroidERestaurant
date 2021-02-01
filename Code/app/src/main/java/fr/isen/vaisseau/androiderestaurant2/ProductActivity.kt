@@ -17,6 +17,8 @@ import org.json.JSONObject
 import java.io.File
 
 private lateinit var binding: ActivityProductBinding
+val USER_PREF = "user_preferences"
+val QUANT_PREF = "quantity"
 
 class ProductActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,16 +64,19 @@ class ProductActivity : AppCompatActivity() {
                 val gson: Basket = Gson().fromJson(toWrite.readText(), Basket::class.java)
                 //firstorNull ~ filter et let n'execute la suite du code que si le reste s'est bien exécuté
                 gson.itemList.firstOrNull { it.dish == addedItem }?.let {
-                    gson.itemList.map { it.quantity += binding.activityProductQuantity.text.toString().toInt()}
+                    it.quantity += binding.activityProductQuantity.text.toString().toInt()
+                    addPreferences(gson)
                     toWrite.writeText(Gson().toJson(gson))
                 }?: run {
                     gson.itemList.add(itemAdded)
+                    addPreferences(gson)
                     toWrite.writeText(Gson().toJson(gson))
                 }
             } else {
                 val itemList: ArrayList<AddItem> = ArrayList()
                 itemList.add(itemAdded)
                 val basket = Basket(itemList)
+                addPreferences(basket)
                 toWrite.writeText(Gson().toJson(basket))
             }
 
@@ -85,12 +90,12 @@ class ProductActivity : AppCompatActivity() {
         }
     }
 
-    /*private fun addPreferences(basket: Basket) {
+    private fun addPreferences(basket: Basket) {
         val count = basket.itemList.sumOf { it.quantity }
 
-        val sharedPreferences = getSharedPreferences(, MODE_PRIVATE)
-        sharedPreferences.edit().putInt(, count).apply()
-    }*/
+        val sharedPreferences = getSharedPreferences(USER_PREF, MODE_PRIVATE)
+        sharedPreferences.edit().putInt(QUANT_PREF, count).apply()
+    }
 
     private fun setViewPager(imagesSrc: List<String>) {
         val adapter = myViewPagerAdapter(supportFragmentManager)
