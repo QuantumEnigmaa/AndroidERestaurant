@@ -24,7 +24,7 @@ class BasketActivity : AppCompatActivity() {
         retrieveBasket()
 
         binding.activityBasketBuy.setOnClickListener {
-            val intent = Intent(this, AccountCreateActivity::class.java)
+            val intent = Intent(this, AccountLoginActivity::class.java)
             startActivity(intent)
         }
     }
