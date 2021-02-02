@@ -75,6 +75,7 @@ class AccountCreateActivity : AppCompatActivity() {
                 sharedPreferences.edit().putInt(USER_ID, gson.data.id).apply()
                 val intent = Intent(this, CommandActivity::class.java)
                 startActivity(intent)
+                finish()
                 /*if (gson.return_code == 200) {
                     Log.i("request", "ça marche")
                     val sharedPreferences = getSharedPreferences(USER_PREF, MODE_PRIVATE)

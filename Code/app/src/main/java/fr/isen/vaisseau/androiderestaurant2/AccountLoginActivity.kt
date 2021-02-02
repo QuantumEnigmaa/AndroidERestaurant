@@ -45,6 +45,7 @@ class AccountLoginActivity : AppCompatActivity() {
                 if (uid.toString().isNotEmpty()) {
                     val intent = Intent(this, CommandActivity::class.java)
                     startActivity(intent)
+                    finish()
                 } else {
                     val dialogBuilder = AlertDialog.Builder(this)
 
