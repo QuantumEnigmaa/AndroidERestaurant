@@ -1,5 +1,6 @@
 package fr.isen.vaisseau.androiderestaurant2
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,6 +22,11 @@ class BasketActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         retrieveBasket()
+
+        binding.activityBasketBuy.setOnClickListener {
+            val intent = Intent(this, AccountCreateActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setRecycler(list: ArrayList<AddItem>, file: File, gson: Basket) {

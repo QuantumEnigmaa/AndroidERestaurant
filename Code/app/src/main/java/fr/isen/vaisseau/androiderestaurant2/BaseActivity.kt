@@ -25,6 +25,10 @@ open class BaseActivity: AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
+
     private fun getBasketItems(): Int {
         val sharePreferences = getSharedPreferences(USER_PREF, MODE_PRIVATE)
         return sharePreferences.getInt(QUANT_PREF, 0)

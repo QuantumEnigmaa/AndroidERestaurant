@@ -37,24 +37,6 @@ class ProductActivity : BaseActivity() {
         buyingHandler(result, "Basket.json")
     }
 
-    /*// Toolbar handlers
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.menu_basket -> {
-                val intent = Intent(this, BasketActivity::class.java)
-                startActivity(intent)
-                Log.i("toolbar", "panier sélectionné")
-            }
-            else -> Log.i("toolbar", "problème")
-        }
-        return super.onOptionsItemSelected(item)
-    }*/
-
     private fun buyingHandler(addedItem: Item, file: String) {
         binding.activityProductBuy.setOnClickListener {
             val toWrite = File(cacheDir.absolutePath+file)
