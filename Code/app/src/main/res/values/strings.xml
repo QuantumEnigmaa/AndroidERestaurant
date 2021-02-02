@@ -1,25 +1,5 @@
 <resources>
     <string name="app_name">HardMeal</string>
-    <string-array name="entries_title">
-        <item>Tartare de viande</item>
-        <item>Assiette de charcuterie</item>
-        <item>Assiette de poivrons et piments</item>
-    </string-array>
-    <string-array name="entries_spec">
-        <item>description 1</item>
-        <item>description 2</item>
-        <item>description 3</item>
-    </string-array>
-    <string-array name="main_title">
-        <item>Côte de boeuf</item>
-        <item>Burritos</item>
-        <item>Tajin épicé</item>
-    </string-array>
-    <string-array name="dessert_title">
-        <item>Fondant au chocolat/piment</item>
-        <item>Crâne de vos ennemis</item>
-        <item>Orteil de géant</item>
-    </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="command_success">Commande réussie !</string>
+    <string name="command_failure">Commande échouée !</string>
 </resources>
