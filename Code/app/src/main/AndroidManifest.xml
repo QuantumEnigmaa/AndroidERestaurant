@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidERestaurant2"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AccountLoginActivity"></activity>
+        <activity android:name=".CommandActivity"></activity>
+        <activity android:name=".AccountLoginActivity" />
         <activity android:name=".AccountCreateActivity" />
         <activity android:name=".BasketActivity" />
         <activity android:name=".ProductActivity" />

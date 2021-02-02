@@ -3,6 +3,7 @@ package fr.isen.vaisseau.androiderestaurant2
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +25,9 @@ class BasketActivity : AppCompatActivity() {
         retrieveBasket()
 
         binding.activityBasketBuy.setOnClickListener {
+            val sharePreferences = getSharedPreferences(USER_PREF, MODE_PRIVATE)
+            val uid = sharePreferences.getInt(USER_ID, 0)
+
             val intent = Intent(this, AccountLoginActivity::class.java)
             startActivity(intent)
         }
