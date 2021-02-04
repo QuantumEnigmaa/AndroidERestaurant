@@ -26,9 +26,11 @@ class HomeActivity : BaseActivity() {
         loadingAnimation = LoadingAnimation(this, "loading.json")
 
         MainScope().launch {
+            supportActionBar?.hide()
             loadingAnimation.playAnimation()
             delay(3000)
             loadingAnimation.stopAnimation(binding.root)
+            supportActionBar?.show()
         }
 
         // onClick handler

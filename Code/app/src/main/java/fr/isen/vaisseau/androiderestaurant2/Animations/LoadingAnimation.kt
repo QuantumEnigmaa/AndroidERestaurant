@@ -1,6 +1,7 @@
 package fr.isen.vaisseau.androiderestaurant2.Animations
 
 import android.app.Activity
+import android.graphics.Color
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.airbnb.lottie.LottieAnimationView
 import fr.isen.vaisseau.androiderestaurant2.BaseActivity
@@ -21,6 +22,7 @@ open class LoadingAnimation constructor(private val context: Activity, animation
         lottieAnimationView.setAnimation(animationName)
         lottieAnimationView.layoutParams = lLayoutParams
 
+        cLayout.setBackgroundColor(Color.WHITE)
         cLayout.addView(lottieAnimationView)
     }
 
