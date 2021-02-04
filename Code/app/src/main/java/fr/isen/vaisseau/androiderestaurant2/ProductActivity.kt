@@ -39,7 +39,7 @@ class ProductActivity : BaseActivity() {
 
     private fun buyingHandler(addedItem: Item, file: String) {
         binding.activityProductBuy.setOnClickListener {
-            val toWrite = File(cacheDir.absolutePath+file)
+            val toWrite = File(cacheDir.absolutePath+file) // Cache file
             val itemAdded = AddItem(addedItem, binding.activityProductQuantity.text.toString().toInt())
 
             if (toWrite.exists()) {

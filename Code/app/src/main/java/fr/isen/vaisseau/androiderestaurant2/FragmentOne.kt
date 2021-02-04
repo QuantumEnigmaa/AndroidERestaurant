@@ -1,6 +1,7 @@
 package fr.isen.vaisseau.androiderestaurant2
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +31,10 @@ class FragmentOne : Fragment() {
 
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
+        }?: run  {
+            Log.i("NoImage", "$param1")
+            Picasso.get().load(R.drawable.error_image).placeholder(R.drawable.searching).error(R.drawable.error_image).fit().into(
+                    binding.fragmentOneImage)
         }
 
         Picasso.get().load(param1).placeholder(R.drawable.searching).error(R.drawable.error_image).fit().into(

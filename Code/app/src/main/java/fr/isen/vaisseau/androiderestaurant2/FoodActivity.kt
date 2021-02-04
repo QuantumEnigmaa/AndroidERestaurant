@@ -28,6 +28,13 @@ class FoodActivity : BaseActivity() {
 
         // Loading data from API
         loadData(result)
+
+        // Pull to refresh
+        binding.activityFoodRefresh.setOnRefreshListener {
+            binding.activityFoodRecycler.Recycler()
+            loadData(result)
+            binding.activityFoodRefresh.isRefreshing = false
+        }
     }
 
     private fun setRecycler(list: List<Item>) {
