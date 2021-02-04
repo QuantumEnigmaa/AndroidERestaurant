@@ -9,12 +9,15 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import fr.isen.vaisseau.androiderestaurant2.databinding.ActivityFoodBinding
+import fr.isen.vaisseau.androiderestaurant2.model.Basket
 import fr.isen.vaisseau.androiderestaurant2.model.DataFoodJSON
 import fr.isen.vaisseau.androiderestaurant2.model.Item
 import org.json.JSONException
 import org.json.JSONObject
 
 private lateinit var binding: ActivityFoodBinding
+val DISH_CACHE = "imageCache"
+val DISH = "image"
 
 class FoodActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,29 +47,48 @@ class FoodActivity : BaseActivity() {
     }
 
     private fun loadData(category: String) {
-        // Instantiate the RequestQueue.
-        val queue = Volley.newRequestQueue(this)
-        val url = "http://test.api.catering.bluecodegames.com/menu"
-        val data = JSONObject()
+        loadCache()?.let {
+            parsing(it, category)
+        }?: run {
+            // Instantiate the RequestQueue.
+            val queue = Volley.newRequestQueue(this)
+            val url = "http://test.api.catering.bluecodegames.com/menu"
+            val data = JSONObject()
 
-        try {
-            data.put("id_shop", "1")
-        } catch (e: JSONException) {
-            e.printStackTrace()
+            try {
+                data.put("id_shop", "1")
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+
+            // Request a string response from the provided URL.
+            val request = JsonObjectRequest(Request.Method.POST, url, data,
+                    {
+                        addCache(it.toString())
+                        parsing(it.toString(), category)
+                    },
+                    { error -> Log.d("error", error.toString()) }
+            )
+
+            // Add the request to the RequestQueue.
+            queue.add(request)
         }
+    }
 
-        // Request a string response from the provided URL.
-        val request = JsonObjectRequest(Request.Method.POST, url, data,
-            {
-                val gson: DataFoodJSON = Gson().fromJson(it.toString(), DataFoodJSON::class.java)
-                gson.data.firstOrNull() { it.name == category}?.items?.let {
-                    setRecycler(it)
-                }
-            },
-            { error -> Log.d("error", error.toString()) }
-        )
+    private fun addCache(rep: String) {
+        val sharedPreferences = getSharedPreferences(DISH_CACHE, MODE_PRIVATE)
+        sharedPreferences.edit().putString(DISH, rep).apply()
+    }
 
-        // Add the request to the RequestQueue.
-        queue.add(request)
+    private fun loadCache(): String? {
+        val sharedPreferences = getSharedPreferences(DISH_CACHE, MODE_PRIVATE)
+        return sharedPreferences.getString(DISH, null)
+    }
+
+    private fun parsing(jsonResponse: String, category: String) {
+        val gson: DataFoodJSON = Gson().fromJson(jsonResponse, DataFoodJSON::class.java)
+        gson.data.firstOrNull() { it.name == category}?.items?.let {
+            setRecycler(it)
+        }
     }
 }
