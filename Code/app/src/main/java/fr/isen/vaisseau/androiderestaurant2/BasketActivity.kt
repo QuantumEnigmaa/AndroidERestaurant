@@ -25,7 +25,7 @@ class BasketActivity : AppCompatActivity() {
         retrieveBasket()
 
         binding.activityBasketBuy.setOnClickListener {
-            val sharePreferences = getSharedPreferences(USER_PREF, MODE_PRIVATE)
+            val sharePreferences = getSharedPreferences(ProductActivity.USER_PREF, MODE_PRIVATE)
             val uid = sharePreferences.getInt(USER_ID, 0)
 
             val intent = Intent(this, AccountLoginActivity::class.java)

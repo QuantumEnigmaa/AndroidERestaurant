@@ -40,7 +40,7 @@ class AccountLoginActivity : AppCompatActivity() {
                 val alert = dialogBuilder.create()
                 alert.show()
             } else {
-                val sharePreferences = getSharedPreferences(USER_PREF, MODE_PRIVATE)
+                val sharePreferences = getSharedPreferences(ProductActivity.USER_PREF, MODE_PRIVATE)
                 val uid = sharePreferences.getInt(USER_ID, 0)
                 if (uid.toString().isNotEmpty()) {
                     val intent = Intent(this, CommandActivity::class.java)

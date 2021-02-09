@@ -71,16 +71,11 @@ class AccountCreateActivity : AppCompatActivity() {
             {
                 val gson: UserDataJSON = Gson().fromJson(it.toString(), UserDataJSON::class.java)
                 Log.i("api_return_code", gson.return_code.toString())
-                val sharedPreferences = getSharedPreferences(USER_PREF, MODE_PRIVATE)
+                val sharedPreferences = getSharedPreferences(ProductActivity.USER_PREF, MODE_PRIVATE)
                 sharedPreferences.edit().putInt(USER_ID, gson.data.id).apply()
                 val intent = Intent(this, CommandActivity::class.java)
                 startActivity(intent)
                 finish()
-                /*if (gson.return_code == 200) {
-                    Log.i("request", "ça marche")
-                    val sharedPreferences = getSharedPreferences(USER_PREF, MODE_PRIVATE)
-                    sharedPreferences.edit().putInt(USER_ID, gson.data.id).apply()
-                }*/
             },
             { error -> Log.d("error", error.toString()) }
         )

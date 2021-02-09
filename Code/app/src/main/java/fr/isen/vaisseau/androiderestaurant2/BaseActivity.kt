@@ -30,7 +30,7 @@ open class BaseActivity: AppCompatActivity() {
     }
 
     private fun getBasketItems(): Int {
-        val sharePreferences = getSharedPreferences(USER_PREF, MODE_PRIVATE)
-        return sharePreferences.getInt(QUANT_PREF, 0)
+        val sharePreferences = getSharedPreferences(ProductActivity.USER_PREF, MODE_PRIVATE)
+        return sharePreferences.getInt(ProductActivity.QUANT_PREF, 0)
     }
 }

@@ -34,7 +34,7 @@ class CommandActivity : AppCompatActivity() {
         val data = JSONObject()
 
         // Get user id
-        val sharePreferences = getSharedPreferences(USER_PREF, MODE_PRIVATE)
+        val sharePreferences = getSharedPreferences(ProductActivity.USER_PREF, MODE_PRIVATE)
         val uid = sharePreferences.getInt(USER_ID, 0)
 
         // Get user Basket

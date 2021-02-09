@@ -17,10 +17,13 @@ import org.json.JSONObject
 import java.io.File
 
 private lateinit var binding: ActivityProductBinding
-val USER_PREF = "user_preferences"
-val QUANT_PREF = "quantity"
 
 class ProductActivity : BaseActivity() {
+    companion object {
+        const val USER_PREF = "user_preferences"
+        const val QUANT_PREF = "quantity"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProductBinding.inflate(layoutInflater)
